@@ -7,6 +7,7 @@ const nextConfig = {
   }
 }
 
+/** @type {Partial<import('@sentry/nextjs').SentryWebpackPluginOptions>} */
 const sentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that
   // the following options are set automatically, and overriding them is not
@@ -17,6 +18,11 @@ const sentryWebpackPluginOptions = {
   silent: true, // Suppresses all logs
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options.
+
+  setCommits: {
+    ignoreMissing: true,
+    ignoreEmpty: true
+  }
 };
 
 module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);

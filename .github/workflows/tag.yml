@@ -25,6 +25,8 @@ jobs:
 
       - name: Build
         run: pnpm run build
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Bundle
         run: pnpm run bundle
