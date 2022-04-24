@@ -22,7 +22,9 @@ const sentryWebpackPluginOptions = {
   setCommits: {
     ignoreMissing: true,
     ignoreEmpty: true
-  }
+  },
+
+  release: process.env.SENTRY_RELEASE,
 };
 
 module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);

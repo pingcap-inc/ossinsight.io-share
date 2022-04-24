@@ -31,6 +31,7 @@ jobs:
         run: pnpm run build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_RELEASE: ${{ github.ref }}
 
       - name: Bundle
         run: pnpm run bundle
