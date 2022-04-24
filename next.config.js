@@ -24,7 +24,7 @@ const sentryWebpackPluginOptions = {
     ignoreEmpty: true
   },
 
-  release: process.env.SENTRY_RELEASE,
+  release: process.env.SENTRY_RELEASE.replaceAll('refs/tags/', ''),
 };
 
 module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
