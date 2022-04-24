@@ -1,0 +1,18 @@
+@startuml
+actor Client
+participant "api.ossinsight.io/api/share" as SCreate
+participant "api.ossinsight.io/share/{id}" as SShow
+participant "OSS" as OSS
+participant "DB" as DB
+
+Client -> SCreate: <b>provide</b> title, description, keywords, url
+SCreate -> SCreate: <b>generate</b> shareId, uploadUrl, downloadUrl
+SCreate -> DB: <b>save</b> shareId, title, description, keywords, downloadUrl, url
+SCreate -> Client: <b>returns</b> shareId, uploadUrl
+Client -> OSS: uploadUrl, imageData
+...
+Client -> SShow: <b>provide</b> shareId
+SShow -> DB: <b>get</b> shareId
+DB -> SShow: <b>returns</b> title, description, keywords, downloadUrl, url
+SShow -> Client: <b>render with</b> title, description, keywords, downloadUrl, url
+@enduml

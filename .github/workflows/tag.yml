@@ -1,0 +1,38 @@
+name: Tag CI
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16.x
+          cache: 'pnpm'
+
+      - name: Install
+        run: pnpm i --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Bundle
+        run: pnpm run bundle
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: ${{ contains(github.ref, '-') }}
+          files: target.tar
