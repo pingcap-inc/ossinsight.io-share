@@ -72,24 +72,24 @@ const Home: NextPage<Data> = ({data: {title, description, keyword, fullImageUrl,
         <meta name="twitter:site" content="OSSInsight" />
         <meta name="twitter:image" content={fullImageUrl} />
 
-        <link rel="alternate" href={fullUrl} />
+        {/*<link rel="alternate" href={fullUrl} />*/}
       </Head>
 
-      <main style={{display: 'none'}}>
+      <main>
         <h1>{title}</h1>
         <p>{description}</p>
         <img alt="image" src={fullImageUrl} />
       </main>
 
       {/* Show if javascript not allowed */}
-      <noscript>
+      <footer>
         Click <a href={fullUrl} target="_self">here</a> to redirect...
-      </noscript>
+      </footer>
 
       {/* Do redirect in browser */}
-      <Script id='redirect' strategy="afterInteractive">
-        {`window.location.href='${fullUrl}'`}
-      </Script>
+      {/*<Script id='redirect' strategy="afterInteractive">*/}
+      {/*  {`window.location.href='${fullUrl}'`}*/}
+      {/*</Script>*/}
     </>
   );
 };
