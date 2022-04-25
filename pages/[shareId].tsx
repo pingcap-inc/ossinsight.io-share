@@ -61,6 +61,7 @@ const Home: NextPage<Data> = ({data: {title, description, keyword, fullImageUrl,
 
         {/* OpenGraph https://ogp.me/ */}
         <meta name="og:title" content={title} />
+        <meta name="og:description" content={description} />
         <meta name="og:type" content="website" />
         <meta name="og:url" content={fullUrl} />
         <meta name="og:image" content={fullImageUrl} />
@@ -69,7 +70,8 @@ const Home: NextPage<Data> = ({data: {title, description, keyword, fullImageUrl,
         {/* Twitter https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:site" content="OSSInsight" />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:site" content="ossinsight.io" />
         <meta name="twitter:image" content={fullImageUrl} />
 
         {/*<link rel="alternate" href={fullUrl} />*/}

@@ -5,7 +5,6 @@ import {isHttpError, ValidateError} from '../../lib/error';
 import {buildUrl} from '../../lib/s3';
 import {ensureString, ensureStringArray} from '../../lib/fields';
 import {pool} from '../../lib/db';
-import S3 from 'aws-sdk/clients/s3';
 
 export default async function handler(
   req: NextApiRequest,
@@ -59,7 +58,7 @@ interface ShareData extends RequestData {
 
 interface ResponseData {
   shareId: string;
-  presignedPost: S3.PresignedPost;
+  signedUrl: string;
 }
 
 async function saveToDb({id, title, description, keyword, imageUrl, path, meta, sessionId}: ShareData) {
@@ -81,10 +80,10 @@ async function createShare(req: NextApiRequest, ip: string | undefined = 'unknow
     imageUrl: url,
   });
 
-  const presignedPost = buildUrl(url);
+  const signedUrl = await buildUrl(url);
 
   return {
     shareId,
-    presignedPost,
+    signedUrl,
   };
 }
