@@ -5,11 +5,13 @@ import {isHttpError, ValidateError} from '../../lib/error';
 import {buildUrl} from '../../lib/s3';
 import {ensureString, ensureStringArray} from '../../lib/fields';
 import {pool} from '../../lib/db';
+import {corsMiddleware} from '../../lib/cors';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
+  await corsMiddleware(req, res)
   if (req.method !== 'POST') {
     res.status(405).send('');
     return;
