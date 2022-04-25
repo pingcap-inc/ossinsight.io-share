@@ -22,7 +22,6 @@ export function buildUrl(url: string): S3.PresignedPost {
     Bucket: BUCKET,
     Expires: EXPIRES,
     Conditions: [
-      {"acl": "public-read" },
       {"bucket": BUCKET },
       ["eq", "$Content-Type", "image/png"],
       ["content-length-range", MIN_SIZE, MAX_SIZE]
