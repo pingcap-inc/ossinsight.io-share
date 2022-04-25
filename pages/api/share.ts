@@ -2,9 +2,10 @@ import type {NextApiRequest, NextApiResponse} from 'next';
 import {generateImageUrl, generateSessionId, generateShareId} from '../../lib/gen';
 import {getRealIp, validateRecaptcha} from '../../lib/req';
 import {isHttpError, ValidateError} from '../../lib/error';
-import {buildUrl} from '../../lib/oss';
+import {buildUrl} from '../../lib/s3';
 import {ensureString, ensureStringArray} from '../../lib/fields';
 import {pool} from '../../lib/db';
+import S3 from 'aws-sdk/clients/s3';
 
 export default async function handler(
   req: NextApiRequest,
@@ -58,7 +59,7 @@ interface ShareData extends RequestData {
 
 interface ResponseData {
   shareId: string;
-  uploadUrl: string;
+  presignedPost: S3.PresignedPost;
 }
 
 async function saveToDb({id, title, description, keyword, imageUrl, path, meta, sessionId}: ShareData) {
@@ -80,10 +81,10 @@ async function createShare(req: NextApiRequest, ip: string | undefined = 'unknow
     imageUrl: url,
   });
 
-  const uploadUrl = buildUrl(url);
+  const presignedPost = buildUrl(url);
 
   return {
     shareId,
-    uploadUrl,
+    presignedPost,
   };
 }

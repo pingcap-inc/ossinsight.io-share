@@ -14,7 +14,7 @@
   "dependencies": {
     "@fullerstack/nax-ipware": "^0.10.0",
     "@sentry/nextjs": "^6.19.6",
-    "ali-oss": "^6.17.1",
+    "aws-sdk": "^2.1120.0",
     "isbot": "^3.4.6",
     "mysql2": "^2.3.3",
     "next": "12.1.5",
@@ -24,7 +24,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/ali-oss": "^6.16.3",
     "@types/node": "17.0.25",
     "@types/react": "18.0.6",
     "@types/react-dom": "18.0.2",
